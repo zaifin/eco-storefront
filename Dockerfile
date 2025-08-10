@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:18-bullseye
 WORKDIR /app
 
 # Setup proxy to API used in saleor-platform
