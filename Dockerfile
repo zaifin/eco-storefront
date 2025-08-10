@@ -1,13 +1,15 @@
 FROM node:18-bullseye
+
 WORKDIR /app
 
-# Setup proxy to API used in saleor-platform
-RUN apt-get update && apt-get install -y nginx
-COPY ./nginx/dev.conf /etc/nginx/conf.d/default.conf
+RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 COPY package*.json ./
 RUN npm install
 COPY . .
+
 ARG API_URI
 ENV API_URI=https://zaifin-eco.onrender.com/graphql/
 
